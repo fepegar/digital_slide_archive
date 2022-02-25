@@ -9,7 +9,7 @@ services:
          - db:/data/db
 
    girder:
-      image: fepegar/dsa_minimal  # building the image doesn't seem to be allowed on Azure
+      image: fepegar/dsa_minimal  # https://docs.microsoft.com/en-us/azure/app-service/configure-custom-container?pivots=container-linux#configure-multi-container-apps
       restart: always
       ports:
          - "443:8080"  # 443 is the HTTPS port. 8080 is the default DSA port
