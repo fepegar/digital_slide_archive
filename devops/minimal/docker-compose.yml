@@ -1,22 +1,22 @@
----
-version: '3'
+version: '3.3'
+
 services:
-  girder:
-    image: dsarchive/dsa_minimal
-    build: .
-    restart: unless-stopped
-    ports:
-      - "${DSA_PORT:-8080}:8080"
-    volumes:
-      - assetstore:/assetstore
-    depends_on:
-      - mongodb
-  mongodb:
-    image: "mongo:latest"
-    restart: unless-stopped
-    command: --nojournal
-    volumes:
-      - db:/data/db
+   mongodb:
+      image: "mongo:latest"
+      restart: always
+      command: --nojournal
+      volumes:
+         - db:/data/db
+
+   girder:
+      image: fepegar/dsa_minimal  # building the image doesn't seem to be allowed on Azure
+      restart: always
+      ports:
+         - "443:8080"  # 443 is the HTTPS port. 8080 is the default DSA port
+      volumes:
+         - assetstore:/assetstore
+      depends_on:
+         - mongodb
 volumes:
-  assetstore:
-  db:
+   assetstore:
+   db:
