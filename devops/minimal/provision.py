@@ -159,10 +159,11 @@ def provision(opts):
 
     # Make sure we have a demo collection and download some demo files
     if getattr(opts, 'samples', None):
-        get_sample_data(
-            adminUser,
-            getattr(opts, 'sample-collection', 'TCGA collection'),
-            getattr(opts, 'sample-folder', 'Sample Images'))
+        logging.warning('Skipping get_sample_data for Azure deployment')
+        # get_sample_data(
+        #     adminUser,
+        #     getattr(opts, 'sample-collection', 'TCGA collection'),
+        #     getattr(opts, 'sample-folder', 'Sample Images'))
     taskFolder = get_collection_folder(adminUser, 'Tasks', 'Slicer CLI Web Tasks')
     if opts.resources:
         provision_resources(opts.resources, adminUser)
@@ -194,7 +195,11 @@ The [HistomicsUI](histomics) application is enabled.""",
                 Setting().get(key) == Setting().getDefault(key))):
             value = value_from_resource(value, adminUser)
             logger.info('Setting %s to %r', key, value)
-            Setting().set(key, value)
+            try:
+                Setting().set(key, value)
+            except Exception as e:
+                logging.error('Error while setting %s to %s', key, value)
+                logging.error(e)
 
 
 def merge_yaml_opts(opts, parser):
