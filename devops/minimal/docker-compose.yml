@@ -15,6 +15,7 @@ services:
          - "443:8080"  # 443 is the HTTPS port. 8080 is the default DSA port
       volumes:
          - assetstore:/assetstore
+         - ${WEBAPP_STORAGE_HOME}/iedatasets:/iedatasets
       depends_on:
          - mongodb
 volumes:
