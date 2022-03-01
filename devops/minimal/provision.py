@@ -178,7 +178,7 @@ def provision(opts):
         'histomicsui.alternate_webroot_path': 'histomicstk',
         'homepage.markdown': """# Digital Slide Archive
 ---
-## Bioinformatics Platform
+## Microsoft Research Cambridge
 
 Welcome to the **Digital Slide Archive**.
 
