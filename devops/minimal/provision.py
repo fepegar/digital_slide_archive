@@ -46,7 +46,7 @@ def get_sample_data(adminUser, collName='Sample Images', folderName='Images'):
 
     :param adminUser: a user to create and modify collections and folders.
     :param collName: the collection name where the data will be added.
-    :param folderName: the folder name where the data will bed aded.
+    :param folderName: the folder name where the data will be added.
     :returns: the folder where the sample data is located.
     """
     folder = get_collection_folder(adminUser, collName, folderName)
@@ -164,7 +164,7 @@ def provision(opts):
         #     adminUser,
         #     getattr(opts, 'sample-collection', 'TCGA collection'),
         #     getattr(opts, 'sample-folder', 'Sample Images'))
-    taskFolder = get_collection_folder(adminUser, 'Tasks', 'Slicer CLI Web Tasks')
+    # taskFolder = get_collection_folder(adminUser, 'Tasks', 'Slicer CLI Web Tasks')  # removed by Fernando
     if opts.resources:
         provision_resources(opts.resources, adminUser)
     # Show label and macro images, plus tile and internal metadata for all users
@@ -186,7 +186,7 @@ Developers who want to use the Girder REST API should check out the
 [interactive web API docs](api/v1).
 
 The [HistomicsUI](histomics) application is enabled.""",
-        'slicer_cli_web.task_folder': str(taskFolder['_id']),
+        # 'slicer_cli_web.task_folder': str(taskFolder['_id']),  # removed by Fernando
     }, **(opts.settings or {}))
     for key, value in settings.items():
         if (value != '__SKIP__' and (
