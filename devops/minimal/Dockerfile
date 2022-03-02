@@ -1,5 +1,7 @@
 FROM python:3.9-slim
 
+COPY provision.py .
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     curl \
@@ -26,7 +28,6 @@ RUN pip install \
 RUN girder build
 
 COPY girder.cfg /etc/.
-COPY provision.py .
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
