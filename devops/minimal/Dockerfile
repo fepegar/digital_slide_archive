@@ -20,6 +20,7 @@ RUN pip install \
     # girder-client is used to get sample data.  If you don't fetch sample \
     # data, it isn't necessary \
     girder-client \
+    girder-oauth \
     --find-links https://girder.github.io/large_image_wheels
 
 RUN girder build
