@@ -21,7 +21,7 @@ declare -a OPTS
 
 HISTOMICS_TESTDATA_FOLDER=${HISTOMICS_TESTDATA_FOLDER:-~/.histomics_data}
 if [ -d "$HISTOMICS_TESTDATA_FOLDER" ]; then
-  OPTS+=(--mount "$HISTOMICS_TESTDATA_FOLDER:/data/")
+  OPTS+=(--mount "$HISTOMICS_TESTDATA_FOLDER:/datum")
 fi
 
 GIRDER_SOURCE_FOLDER="${GIRDER_SOURCE_FOLDER:-${DIR}/../../girder}"
@@ -39,4 +39,5 @@ if [ -d "$SLICER_CLI_WEB_SOURCE_FOLDER" ]; then
   OPTS+=(--mount "$SLICER_CLI_WEB_SOURCE_FOLDER:/opt/slicer_cli_web/")
 fi
 
+echo "${OPTS[@]}"
 $DIR/../ansible/deploy_docker.py "${OPTS[@]}" $@

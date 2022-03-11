@@ -6,7 +6,9 @@ services:
       restart: always
       command: --nojournal
       volumes:
-         - db:/data/db
+         - type: volume
+           source: db
+           target: /data/db
 
    girder:
       image: fepegar/dsa_minimal  # https://docs.microsoft.com/en-us/azure/app-service/configure-custom-container?pivots=container-linux#configure-multi-container-apps
@@ -14,8 +16,15 @@ services:
       ports:
          - "443:8080"  # 443 is the HTTPS port. 8080 is the default DSA port
       volumes:
-         - assetstore:/assetstore
-         - ${WEBAPP_STORAGE_HOME}/iedatasets:/iedatasets
+         - type: volume
+           source: assetstore
+           target: /assetstore
+         - type: bind
+           source: ${WEBAPP_STORAGE_HOME}/iedatasets
+           target: /iedatasets
+         - type: bind
+           source: /tmp/datasets
+           target: /datasets
       depends_on:
          - mongodb
 volumes:
