@@ -16,6 +16,8 @@ RUN apt-get update && \
     tmux \
     # For developer convenience \
     nano \
+    vim \
+    tree \
     # Needed for su command
     # sudo \
     && \
@@ -35,8 +37,9 @@ RUN python --version && \
 
 # Clone packages and pip install what we want to be local
 RUN cd /opt && \
-    git clone https://github.com/girder/girder && \
+    git clone https://github.com/fepegar/girder && \
     cd /opt/girder && \
+    git checkout add-microsoft-oauth-provider && \
     pip install --no-cache-dir -e .[mount] && \
     pip install --no-cache-dir -e clients/python
 
