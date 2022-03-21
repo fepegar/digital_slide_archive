@@ -41,7 +41,8 @@ RUN cd /opt && \
     cd /opt/girder && \
     git checkout add-microsoft-oauth-provider && \
     pip install --no-cache-dir -e .[mount] && \
-    pip install --no-cache-dir -e clients/python
+    pip install --no-cache-dir -e clients/python && \
+    pip install girder-oauth
 
 RUN cd /opt && \
     git clone https://github.com/girder/girder_worker_utils && \
